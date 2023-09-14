@@ -33,14 +33,18 @@ public class DataHelper {
         return new AuthInfo(generateRandomLogin(), generateRandomPassword());
     }
 
+
+
     @Value
     public static class VerificationCode {
         String code;
     }
 
-    public static Code generateRandomVerificationCode(){
-        return faker.code();
+    public static VerificationCode generateVerificationCode(int length){
+        return new VerificationCode(String.valueOf(faker.code()));
     }
+
+
 
     @Value
     public static class CardInfo {
