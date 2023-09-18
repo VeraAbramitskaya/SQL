@@ -33,6 +33,10 @@ public class DataHelper {
         return new AuthInfo(generateRandomLogin(), generateRandomPassword());
     }
 
+    public static AuthInfo generateExistLoginAndRandomPassword(){
+        return new AuthInfo(getExistLogin(), generateRandomPassword());
+    }
+
 
 
     @Value

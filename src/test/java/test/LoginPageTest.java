@@ -8,10 +8,11 @@ import page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static data.SQLHelper.cleanDatabase;
+import static data.SQLHelper.cleanStatusOfUserVasya;
 
 public class LoginPageTest {
-//    @BeforeEach
-//    void cleanAuthCodes (){cleanAuthCodes();}
+    //@AfterAll
+    //void cleanUserVasya (){cleanStatusOfUserVasya();}
     @AfterAll
     static void shutdown() {
         cleanDatabase();
@@ -25,7 +26,7 @@ public class LoginPageTest {
         var loginPage = open("http://Localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfoWithTestData();
         var verificationPage = loginPage.validLogin(authInfo);
-        verificationPage.verifycationPageVisiblity();
+        verificationPage.verificationPageVisibility();
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode.getCode());
     }
@@ -36,7 +37,7 @@ public class LoginPageTest {
         var loginPage = open("http://Localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfoWithTestData();
         var verificationPage = loginPage.validLogin(authInfo);
-        verificationPage.verifycationPageVisiblity();
+        verificationPage.verificationPageVisibility();
         var verificationCode = DataHelper.generateVerificationCode(4);
         verificationPage.verify(verificationCode.getCode());
         verificationPage.verifyErrorNotificationVisibility();
@@ -48,10 +49,8 @@ public class LoginPageTest {
         //    "введен неверный пароль".
     void shouldGetErrorNotificationIfRandomPassAndExistUser(){
         var loginPage = open("http://Localhost:9999", LoginPage.class);
-        var authInfo = DataHelper.getAuthInfoWithTestData();
+        var authInfo = DataHelper.generateExistLoginAndRandomPassword();
         var verificationPage = loginPage.validLogin(authInfo);
-        var existLogin = DataHelper.getExistLogin();
-        var randomPassword = DataHelper.generateRandomPassword();
         DashboardPage.verifyErrorNotificationVisibility();
 
     }
@@ -60,7 +59,7 @@ public class LoginPageTest {
     @DisplayName("Should get error notification if user is not exist")
     void shouldGerErrorNotificationIfUserIsNotExist(){
         var loginPage = open("http://Localhost:9999", LoginPage.class);
-        var authInfo = DataHelper.getAuthInfoWithTestData();
+        var authInfo = DataHelper.generateRandomUser();
         var verificationPage = loginPage.validLogin(authInfo);
         DashboardPage.verifyErrorNotificationVisibility();
 

@@ -36,9 +36,10 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static void cleanAuthCodes (){
+    public static void cleanStatusOfUserVasya(){
         var connection = getConn();
-        runner.execute(connection, "DELETE FROM auth_codes");
+        runner.execute(connection, "UPDATE users SET status = REPLACE(status , '*', 'active') " +
+                "WHERE login = 'vasya'");
     }
 
 }
