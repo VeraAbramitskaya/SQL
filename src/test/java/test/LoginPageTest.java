@@ -3,17 +3,20 @@ package test;
 import data.DataHelper;
 import data.SQLHelper;
 import org.junit.jupiter.api.*;
+import page.DashboardPage;
 import page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static data.SQLHelper.cleanDatabase;
-import static data.SQLHelper.getVerificationCode;
 
 public class LoginPageTest {
+//    @BeforeEach
+//    void cleanAuthCodes (){cleanAuthCodes();}
     @AfterAll
     static void shutdown() {
         cleanDatabase();
     }
+
 
 
     @Test
@@ -35,8 +38,8 @@ public class LoginPageTest {
         var verificationPage = loginPage.validLogin(authInfo);
         verificationPage.verifycationPageVisiblity();
         var verificationCode = DataHelper.generateVerificationCode(4);
-        verificationPage.validVerify(verificationCode.getCode());
-        verificationPage.verifyErrorNotificationVisiblity();
+        verificationPage.verify(verificationCode.getCode());
+        verificationPage.verifyErrorNotificationVisibility();
     }
 
     @Test
@@ -49,7 +52,7 @@ public class LoginPageTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var existLogin = DataHelper.getExistLogin();
         var randomPassword = DataHelper.generateRandomPassword();
-        verificationPage.verifyErrorNotificationVisiblity();
+        DashboardPage.verifyErrorNotificationVisibility();
 
     }
 
@@ -59,7 +62,7 @@ public class LoginPageTest {
         var loginPage = open("http://Localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfoWithTestData();
         var verificationPage = loginPage.validLogin(authInfo);
-        verificationPage.verifyErrorNotificationVisiblity();
+        DashboardPage.verifyErrorNotificationVisibility();
 
 
     }

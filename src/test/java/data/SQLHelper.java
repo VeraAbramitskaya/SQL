@@ -34,4 +34,11 @@ public class SQLHelper {
         runner.execute(connection, "DELETE FROM cards");
         runner.execute(connection, "DELETE FROM users");
     }
+
+    @SneakyThrows
+    public static void cleanAuthCodes (){
+        var connection = getConn();
+        runner.execute(connection, "DELETE FROM auth_codes");
+    }
+
 }

@@ -1,7 +1,6 @@
 package page;
 
 import com.codeborne.selenide.SelenideElement;
-import data.DataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,7 +16,7 @@ public class VerificationPage {
         codeField.shouldBe(visible);
     }
 
-    public void verifyErrorNotificationVisiblity() {
+    public void verifyErrorNotificationVisibility() {
         errorNotification.shouldBe(visible);
     }
 
