@@ -15,7 +15,7 @@ public class LoginPage {
     private final SelenideElement loginButton = $("[data-test-id=action-login]");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification']");
 
-    public void verifyErrorNotificationVisiblity() {errorNotification.shouldBe(visible);}
+    public void verifyErrorNotificationVisibility() {errorNotification.shouldBe(visible);}
     public VerificationPage validLogin(DataHelper.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());

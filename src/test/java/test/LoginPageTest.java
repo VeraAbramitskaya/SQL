@@ -8,17 +8,14 @@ import page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static data.SQLHelper.cleanDatabase;
-import static data.SQLHelper.cleanStatusOfUserVasya;
+
 
 public class LoginPageTest {
-    //@AfterAll
-    //void cleanUserVasya (){cleanStatusOfUserVasya();}
+
     @AfterAll
     static void shutdown() {
         cleanDatabase();
     }
-
-
 
     @Test
     @DisplayName("Should successfully login to dashboard with login and password from sut test data")
@@ -43,6 +40,8 @@ public class LoginPageTest {
         verificationPage.verifyErrorNotificationVisibility();
     }
 
+
+
     @Test
     @DisplayName("Should get error notification if use random pass with exist login")
         //    логин от существующего юзера, пароль рандомный. должно появляться сообщеное об ошибке
@@ -51,7 +50,7 @@ public class LoginPageTest {
         var loginPage = open("http://Localhost:9999", LoginPage.class);
         var authInfo = DataHelper.generateExistLoginAndRandomPassword();
         var verificationPage = loginPage.validLogin(authInfo);
-        DashboardPage.verifyErrorNotificationVisibility();
+        loginPage.verifyErrorNotificationVisibility();
 
     }
 
@@ -61,7 +60,7 @@ public class LoginPageTest {
         var loginPage = open("http://Localhost:9999", LoginPage.class);
         var authInfo = DataHelper.generateRandomUser();
         var verificationPage = loginPage.validLogin(authInfo);
-        DashboardPage.verifyErrorNotificationVisibility();
+        loginPage.verifyErrorNotificationVisibility();
 
 
     }

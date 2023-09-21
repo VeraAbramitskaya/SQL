@@ -19,10 +19,5 @@ public class DashboardPage {
         heading.shouldBe(visible);
     }
 
-    public static void verifyErrorNotificationVisibility() {
-        errorNotification.shouldBe(visible);
-    }
-
-
 
 }
